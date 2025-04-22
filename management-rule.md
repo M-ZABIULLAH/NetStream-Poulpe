@@ -30,3 +30,13 @@
 **RG :** Un cinéphile doit avoir un mail.
 **RG :** Un cinéphile doit avoir un mot de passe.
 **RG :** Un cinéphile peut lister des rôles et films préférés.
+
+## Rôles
+
+**RG :** Un rôle doit avoir un nom.
+**RG :** Un rôle doit avoir un type.
+
+## Archives
+
+**RG :** Une archive doit contenir des anciennes données. - nom - prénom - mail - mot de passe
+**RG :** Une archive doit contenir une date de modification.
