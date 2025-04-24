@@ -47,9 +47,9 @@ CREATE TABLE archive(
 ```SQL
 CREATE TABLE movie(
    movie_id UUID PRIMARY KEY,
-   movie_title VARCHAR(50) ,
+   movie_title VARCHAR(200) ,
    movie_release_date DATE,
-   movie_length INTEGER NOT NULL,
+   movie_length TIME NOT NULL,
    director_id UUID NOT NULL,
    FOREIGN KEY(director_id) REFERENCES director(director_id)
 );
