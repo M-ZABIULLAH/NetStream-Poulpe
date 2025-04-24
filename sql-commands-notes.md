@@ -86,3 +86,15 @@ FROM actor
 WHERE EXTRACT(YEAR FROM AGE(actor_birthdate)) <30
 ORDER BY actor_lastname, actor_firstname;
 ```
+
+## Filtrer les personnages principaux selon un film donné
+
+```SQL
+select actor_firstname, actor_lastname,c.character_type, m.movie_title from actor
+join acting act on act.actor_id = actor.actor_id
+join character c on c.character_id = act.character_id
+join movie_characters mv on mv.character_id = c.character_id
+join movie m on m.movie_id = mv.movie_id
+where character_type = 'Protagoniste'
+and m.movie_title = 'King Kong';
+```
