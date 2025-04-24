@@ -30,3 +30,6 @@
 |                        | archive_date        | Date de modification          | TIMESTAMP | NOT NULL        | 08/15/2006 17:50:12                  |
 |                        | archive_oldvalue    | Ancienne valeur               | VARCHAR   | NULL            | titouan59rpz@gmail.com               |
 |                        | archive_newvalue    | Nouvelle valeur               | VARCHAR   | NULL            | titouan.dupont@gmail.com             |
+| **character**          | character_id        | Numéro du personnage          | UUID      | NOT NULL UNIQUE | 431c0816-4f50-450c-9f3a-8eb095659dd5 |
+|                        | character_name      | Nom du personnage             | VARCHAR   | NOT NULL        | Jack Sparrow                         |
+|                        | character_type      | Type du personnage            | VARCHAR   | NOT NULL        | Protagoniste                         |
