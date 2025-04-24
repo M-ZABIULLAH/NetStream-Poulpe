@@ -87,6 +87,16 @@ WHERE EXTRACT(YEAR FROM AGE(actor_birthdate)) <30
 ORDER BY actor_lastname, actor_firstname;
 ```
 
+## Filtrer les films pour un acteur
+
+```SQL
+select actor_firstname, actor_lastname, m.movie_title from actor
+join acting act on act.actor_id = actor.actor_id
+join character c on c.character_id = act.character_id
+join movie_characters mv on mv.character_id = c.character_id
+join movie m on m.movie_id = mv.movie_id;
+```
+
 ## Filtrer les personnages principaux selon un film donné
 
 ```SQL
@@ -97,4 +107,29 @@ join movie_characters mv on mv.character_id = c.character_id
 join movie m on m.movie_id = mv.movie_id
 where character_type = 'Protagoniste'
 and m.movie_title = 'King Kong';
+```
+
+## Modifier un film
+
+```SQL
+UPDATE movie
+SET movie_title = 'Sonic',
+    movie_release_date = '2015-01-10',
+    movie_length = '01:20:00',
+    director_id = '770561c0-81e7-4140-bf51-7588f9a8ceaa'
+WHERE movie_id = '702a0dd6-12b5-4ea7-adc1-fab458f7f6b8';
+```
+
+## Ajouter un acteur
+
+```SQL
+insert into actor (actor_id, actor_firstname, actor_lastname, actor_birthdate)
+values (gen_random_uuid(),'Michel', 'Gilbert', '1949-09-25' );
+```
+
+## Supprimer un acteur
+
+```SQL
+DELETE FROM actor
+WHERE actor_id = '8b5b3470-264c-46d5-82f3-3e840b34a6b9';
 ```
