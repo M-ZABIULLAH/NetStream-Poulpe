@@ -1,5 +1,13 @@
 # NetStream-Poulpe
 
+## Pourquoi PostegreSQL pour notre SGBD
+
+Dans le cadre de ce projet d'application pour un futur site de streaming et de recherche de films, nous avons fait le choix de PostgreSQL comme système de gestion de base de données relationelle (SGBDR). Ce choix repose sur plusieurs critères techniques et contextuels en lien direct avec la structure et les besoin de notre modèle.
+
+- Dans un premier temps, PostgreSQL nous offre un respect strict du modèle relationnel, ce qui nous garabtira l'intégrité des données grâce a sa gestion des clés primaire, étrangère et des contraintes. Nos schémas MPD MLD et MPT comprendent plusieurs relaxion complexes (1,n et n,n) ainsi que des entités dont l'un avec un suivi d'historique (archive), ce qui néccessite une base fiable et qui restera cohérente dans le temps.
+
+- Comme un système de triggers, nous a été demander par le client pour l'entité cinéphile.
+
 ## Requetes SQL
 
 ### Les titres et dates de sortie des films du plus récent au plus ancien
