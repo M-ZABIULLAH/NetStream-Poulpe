@@ -101,3 +101,92 @@ $$ language plpgsql;
 ```SQL
 CALL delete_actor('d4f2e6b1-1654-4f9f-9b98-ce4ea95ee957');
 ```
+
+## Commandes diverses
+
+### Créer un acteur et lui assigné un personnage puis l'ajouter dans un film
+
+```SQL
+CREATE PROCEDURE add_actor(
+IN p_actor_id UUID,
+IN p_firstname VARCHAR,
+IN p_lastname VARCHAR,
+IN p_birthdate DATE,
+IN p_character_id UUID,
+IN p_character_name VARCHAR,
+IN p_character_type VARCHAR,
+IN p_movie_id UUID
+)
+AS $$
+BEGIN
+
+INSERT INTO actor (actor_id, actor_firstname, actor_lastname, actor_birthdate)
+VALUES (p_actor_id, p_firstname, p_lastname, p_birthdate);
+
+INSERT INTO character (character_id, character_name, character_type)
+VALUES (p_character_id, p_character_name, p_character_type);
+
+INSERT INTO acting (actor_id,character_id)
+VALUES (p_actor_id, p_character_id);
+
+INSERT INTO movie_characters (movie_id, character_id)
+VALUES (p_movie_id, p_character_id);
+END;
+$$ language plpgsql;
+```
+
+```SQL
+call add_actor(
+gen_random_uuid(),
+'Ezra',
+'Odyn',
+'1985-08-28',
+gen_random_uuid(),
+'Black Panther',
+'Personnage principal',
+'702a0dd6-12b5-4ea7-adc1-fab458f7f6b8'
+);
+```
+
+### Trigger pour les modifications de compte
+
+```SQL
+CREATE OR REPLACE FUNCTION cinephile_logs()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.cinephile_firstname IS DISTINCT FROM OLD.cinephile_firstname THEN
+        INSERT INTO archive (archive_id, archive_newvalue, archive_oldvalue, cinephile_id)
+        VALUES (
+            gen_random_uuid(),
+            NEW.cinephile_firstname,
+            OLD.cinephile_firstname,
+            NEW.cinephile_id
+        );
+    ELSIF NEW.cinephile_lastname IS DISTINCT FROM OLD.cinephile_lastname THEN
+        INSERT INTO archive (archive_id, archive_newvalue, archive_oldvalue, cinephile_id)
+        VALUES (
+            gen_random_uuid(),
+            NEW.cinephile_lastname,
+            OLD.cinephile_lastname,
+            NEW.cinephile_id
+        );
+    ELSIF NEW.cinephile_mail IS DISTINCT FROM OLD.cinephile_mail THEN
+        INSERT INTO archive (archive_id, archive_newvalue, archive_oldvalue, cinephile_id)
+        VALUES (
+            gen_random_uuid(),
+            NEW.cinephile_mail,
+            OLD.cinephile_mail,
+            NEW.cinephile_id
+        );
+    END IF;
+    RETURN NEW;
+END;
+$$ language plpgsql;
+```
+
+```SQL
+CREATE TRIGGER cinephile_trigger
+AFTER UPDATE ON cinephile
+FOR EACH ROW
+EXECUTE FUNCTION cinephile_logs();
+```
