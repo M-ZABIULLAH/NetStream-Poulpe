@@ -53,3 +53,51 @@ $$ LANGUAGE plpgsql;
 ```SQL
 SELECT * FROM get_actor('d4f2e6b1-1654-4f9f-9b98-ce4ea95ee957');
 ```
+
+### UPDATE
+
+```SQL
+CREATE PROCEDURE update_actor(
+    IN p_actor_id UUID,
+    IN p_actor_firstname VARCHAR DEFAULT NULL,
+    IN p_actor_lastname VARCHAR DEFAULT NULL,
+    IN p_actor_birthdate DATE DEFAULT NULL
+)
+AS $$
+BEGIN
+    UPDATE actor
+    SET
+        actor_firstname = COALESCE(p_actor_firstname, actor_firstname),
+        actor_lastname = COALESCE(p_actor_lastname, actor_lastname),
+        actor_birthdate = COALESCE(p_actor_birthdate, actor_birthdate)
+    WHERE actor_id = p_actor_id;
+END;
+$$ language plpgsql;
+```
+
+```SQL
+CALL update_actor(
+    '38cdeef0-10d4-48a9-9297-6bc8dd8c51f9',
+    'Armin',
+    'Dejaeger',
+    NULL
+);
+```
+
+### DELETE
+
+```SQL
+CREATE PROCEDURE delete_actor(
+    IN p_actor_id UUID
+)
+AS $$
+BEGIN
+    DELETE FROM actor
+    WHERE actor_id = p_actor_id;
+END;
+$$ language plpgsql;
+```
+
+```SQL
+CALL delete_actor('d4f2e6b1-1654-4f9f-9b98-ce4ea95ee957');
+```
