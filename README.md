@@ -6,7 +6,9 @@ Dans le cadre de ce projet d'application pour un futur site de streaming et de r
 
 - Dans un premier temps, PostgreSQL nous offre un respect strict du modèle relationnel, ce qui nous garabtira l'intégrité des données grâce a sa gestion des clés primaire, étrangère et des contraintes. Nos schémas MPD MLD et MPT comprendent plusieurs relaxion complexes (1,n et n,n) ainsi que des entités dont l'un avec un suivi d'historique (archive), ce qui néccessite une base fiable et qui restera cohérente dans le temps.
 
-- Comme un système de triggers, nous a été demander par le client pour l'entité cinéphile.
+- Comme un système de triggers, nous a été demander par le client pour l'entité cinéphile. PostgreSQL propose un sytème de triggers puissant et flexible, qui sera idéal pour l'automatisation, la tracabilité de modifications comme demandé par notre client. Nous pourrons également grâce à postgreSQL utiliser des fonctions personnalisées comme celle qui nous a permis lors de la création d'un acteur ou une actrice de lui créer un rôle qui sera alors également rattacher à un film, ce qui facilite les ajout dans notre base de données.
+
+-
 
 ## Requetes SQL
 
