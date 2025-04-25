@@ -8,7 +8,9 @@ Dans le cadre de ce projet d'application pour un futur site de streaming et de r
 
 - Comme un système de triggers, nous a été demander par le client pour l'entité cinéphile. PostgreSQL propose un sytème de triggers puissant et flexible, qui sera idéal pour l'automatisation, la tracabilité de modifications comme demandé par notre client. Nous pourrons également grâce à postgreSQL utiliser des fonctions personnalisées comme celle qui nous a permis lors de la création d'un acteur ou une actrice de lui créer un rôle qui sera alors également rattacher à un film, ce qui facilite les ajout dans notre base de données.
 
--
+- Un des autres avantages que nous avons trouver et justifier notre choix d'utiliser PostgreSQL est sa richesse de fonctions natives, notament pour la manipulation des dates. Nous devions saisir l'âge de nos acteurs, nous avons été confronté a deux possiblités par date de naissance ou de stocker l'age directement, la date de naissance permettant une meilleure mise à journn d'éviter d'être recalculer manuellement. Avec PostgreSQL le calcul de l'âge de l'acteur à partir de sa date de naissances est directement possible via les fonctions comme AGE() et DATE_PART(), sans avoir à écrire de logique supplémentaire.
+
+PostgreSQL repondait donc pleinnement aux exigences fonctionelles, technique et évolutive avec l'ajout par la suite de films en streaming de notre projet.
 
 ## Requetes SQL
 
