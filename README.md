@@ -1,7 +1,5 @@
 # NetStream-Poulpe
 
-**PostgreSQL répond donc pleinement aux exigences fonctionnelles, techniques et évolutives** de notre projet, tout en s’adaptant à l'ajout futur de fonctionnalités telles que le streaming de films.
-
 ## Requetes SQL
 
 ### Les titres et dates de sortie des films du plus récent au plus ancien
