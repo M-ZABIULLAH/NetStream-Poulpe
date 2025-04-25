@@ -77,7 +77,7 @@ CREATE TABLE acting(
    character_id UUID NOT NULL,
    PRIMARY KEY(actor_id, character_id),
    FOREIGN KEY(actor_id) REFERENCES actor(actor_id),
-   FOREIGN KEY(character_id) REFERENCES character_(character_id)
+   FOREIGN KEY(character_id) REFERENCES character(character_id)
 );
 ```
 
@@ -101,7 +101,7 @@ CREATE TABLE movie_characters(
    character_id UUID NOT NULL,
    PRIMARY KEY(movie_id, character_id),
    FOREIGN KEY(movie_id) REFERENCES movie(movie_id),
-   FOREIGN KEY(character_id) REFERENCES character_(character_id)
+   FOREIGN KEY(character_id) REFERENCES character(character_id)
 );
 ```
 
@@ -113,6 +113,6 @@ CREATE TABLE character_bookmark(
    character_id UUID NOT NULL,
    PRIMARY KEY(cinephile_id, character_id),
    FOREIGN KEY(cinephile_id) REFERENCES cinephile(cinephile_id),
-   FOREIGN KEY(character_id) REFERENCES character_(character_id)
+   FOREIGN KEY(character_id) REFERENCES character(character_id)
 );
 ```
