@@ -18,61 +18,71 @@ Dans le cadre de ce projet d'application pour un futur site de streaming et de r
 
 ```sql
 SELECT title, release_date
-FROM movies
-ORDER BY release_date DESC;
+FROM movie
+ORDER BY movie_release_date DESC;
 ```
 
 ### Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique
 
 ```sql
-SELECT first_name, last_name, DATE_PART('year', AGE(birth_date)) AS age
-FROM actors
-WHERE DATE_PART('year', AGE(birth_date)) < 30
-ORDER BY last_name, first_name;
+SELECT actor_lastname, actor_firstname, DATE_PART('year', AGE(actor_birthdate)) AS age
+FROM actor
+WHERE DATE_PART('year', AGE(actor_birthdate)) > 30
+ORDER BY actor_lastname;
 ```
 
 ### La liste des acteurs/actrices principaux pour un film donné
 
 ```sql
-SELECT a.first_name, a.last_name, c.character_type, m.title
-FROM actors
-JOIN acting act ON act.id = acting.actor_id
-JOIN character c ON c.id = act.character_id
-JOIN movie_character mc ON mc.id = c.movie_character_id
-JOIN movies m ON m.id = mc.movie_id
-WHERE m.title = 'Nom du film';
+SELECT actor_firstname, actor_lastname,c.character_type, m.movie_title FROM actor
+JOIN acting act ON act.actor_id = actor.actor_id
+JOIN character c ON c.character_id = act.character_id
+JOIN movie_characters mv ON mv.character_id = c.character_id
+JOIN movie m ON m.movie_id = mv.movie_id
+WHERE character_type = 'Protagoniste'
+AND m.movie_title = 'King Kong';
 ```
 
 ### La liste des films pour un acteur/actrice donné
 
 ```sql
-SELECT m.title
-FROM movies m
-JOIN acting act ON act.movie_id = m.id
-JOIN actor a ON a.id = act.actor_id
-WHERE a.first_name = 'Prénom' AND a.last_name = 'Nom';
+SELECT actor_firstname, actor_lastname, m.movie_title FROM actor
+JOIN acting act ON act.actor_id = actor.actor_id
+JOIN character c ON c.character_id = act.character_id
+JOIN movie_characters mv ON mv.character_id = c.character_id
+JOIN movie m ON m.movie_id = mv.movie_id;
 ```
 
 ### Ajouter un film
 
 ```sql
-INSERT INTO movie (movie_title,movie_lenght, movie_release_date)
-VALUES ('Avenger Endgames', '2H15', '2021');
+INSERT INTO movie (movie_id, movie_title,movie_lenght, movie_release_date)
+VALUES (gen_random_uuid(),'Avenger Endgames', '2H15', '2021');
 ```
 
 ### Ajouter un acteur/actrice
 
 ```sql
-INSERT INTO actor (actor_firstname, actor_lastname,actor_birthdate)
-VALUES ('Scarlett','Johansson', '1984/11/22');
+INSERT INTO actor (actor_id,actor_firstname, actor_lastname,actor_birthdate)
+VALUES (gen_random_uuid()'Scarlett','Johansson', '1984/11/22');
 ```
 
 ### Modifier un film
 
 ```sql
-UPDATE MOVIE
-SET movie_title = 'Pirate des Caraibes 5'
-WHERE movie_id= 'ac558f45-d121-48c1-9415-8c86bbedfd0c'
+UPDATE movie
+SET movie_title = 'Sonic',
+    movie_release_date = '2015-01-10',
+    movie_length = '01:20:00',
+    director_id = '770561c0-81e7-4140-bf51-7588f9a8ceaa'
+WHERE movie_id = '702a0dd6-12b5-4ea7-adc1-fab458f7f6b8';
+```
+
+## Supprimer un acteur/actrice
+
+```sql
+DELETE FROM actor
+WHERE actor_id = '8b5b3470-264c-46d5-82f3-3e840b34a6b9';
 ```
 
 ### Afficher les 3 derniers acteurs/actrices ajouté(e)s
