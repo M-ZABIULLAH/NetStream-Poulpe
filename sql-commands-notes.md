@@ -133,3 +133,17 @@ values (gen_random_uuid(),'Michel', 'Gilbert', '1949-09-25' );
 DELETE FROM actor
 WHERE actor_id = '8b5b3470-264c-46d5-82f3-3e840b34a6b9';
 ```
+
+## Lier un acteur à un film
+
+```SQL
+INSERT INTO movie_characters (movie_id, character_id)
+VALUES ('e26e06aa-3ddc-4d2f-b222-1c3979eebe9d', 'e6338e33-feb9-4c1b-b3c0-f634aeec77ca');
+```
+
+## Filtrer les 3 acteurs les plus récent dans la bdd
+
+```SQL
+select * from actor
+order by created_at DESC LIMIT 3;
+```
