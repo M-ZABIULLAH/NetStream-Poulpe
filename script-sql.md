@@ -38,7 +38,7 @@ CREATE TABLE archive(
    archive_id UUID PRIMARY KEY,
    archive_newvalue VARCHAR(50),
    archive_oldvalue VARCHAR(50),
-   archive_date TIMESTAMP,
+   archive_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
    cinephile_id UUID NOT NULL,
    FOREIGN KEY(cinephile_id) REFERENCES cinephile(cinephile_id)
 );
