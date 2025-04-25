@@ -38,7 +38,9 @@ CREATE TABLE archive(
    archive_id UUID PRIMARY KEY,
    archive_newvalue VARCHAR(50),
    archive_oldvalue VARCHAR(50),
-   archive_date TIMESTAMP
+   archive_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   cinephile_id UUID NOT NULL,
+   FOREIGN KEY(cinephile_id) REFERENCES cinephile(cinephile_id)
 );
 ```
 
@@ -63,9 +65,7 @@ CREATE TABLE cinephile(
    cinephile_firstname VARCHAR(50),
    cinephile_lastname VARCHAR(50),
    cinephile_mail VARCHAR(128),
-   cinephile_password VARCHAR(64),
-   archive_id UUID NOT NULL,
-   FOREIGN KEY(archive_id) REFERENCES archive(archive_id)
+   cinephile_password VARCHAR(64)
 );
 ```
 
