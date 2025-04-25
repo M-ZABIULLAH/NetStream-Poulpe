@@ -1,6 +1,6 @@
 # Règles de gestion
 
-## Film
+## Movie
 
 **RG :** Un film doit avoir un titre.
 **RG :** Un film doit avoir un acteur.
@@ -9,7 +9,7 @@
 **RG :** Un film doit avoir une année de sortie.
 **RG :** Un film doit avoir une durée.
 
-## Acteur
+## Actor
 
 **RG :** chaque acteur a un prénom.
 **RG :** Chaque acteur a un nom.
@@ -17,13 +17,13 @@
 **RG :** Chaque acteur a un rôle dans un film.
 **RG :** Un acteur peut jouer dans plusieurs films.
 
-## Réalisateur
+## Director
 
 **RG :** Un réalisateur doit avoir un nom.
 **RG :** Un réalisateur doit avoir un prénom.
 **RG :** Un réalisateur peut être lié à plusieurs films.
 
-## Cinéphile
+## Cinephile
 
 **RG :** Un cinéphile doit avoir un nom.
 **RG :** Un cinéphile doit avoir un prénom.
@@ -32,14 +32,14 @@
 **RG :** Un cinéphile peut lister des rôles et films préférés.
 **RG :** Un cinéphile peut mettre a jour ses informations.
 
-## Rôles
+## Character
 
 **RG :** Un rôle doit avoir un nom.
 **RG :** Un rôle doit avoir un type.
 **RG :** Un rôle doit être lié à un ou plusieurs acteur(s).
 **RG :** Un rôle doit être lié à un ou plusieurs film(s).
 
-## Archives
+## Archive
 
 **RG :** Une archive doit contenir une ancienne donnée.
 **RG :** Une archive doit contenir une nouvelle donnée.
