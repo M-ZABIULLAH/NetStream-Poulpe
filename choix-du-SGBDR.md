@@ -1,5 +1,14 @@
 # Choix du SGBDR : Pourquoi PostgreSQL ?
 
+## Sommaire
+
+- [Objectif du document](#objectif-du-document)
+- [Qu'est-ce que Postgres](#1-quest-ce-que-postgresql-)
+- [Raisons du choix](#2-raisons-du-choix)
+- [Comparaison avec d'autres SGBDR](#-3-comparaison-avec-dautres-sgbdr)
+- [Dans le contexte de notre projet](#-4-dans-le-contexte-de-notre-projet)
+- [🏁 Conclusion](#-conclusion)
+
 ## Objectif du document
 
 Ce document présente les raisons du choix de PostgreSQL comme Système de Gestion de Base de Données Relationnelle (SGBDR) pour le projet **NetStream**.
