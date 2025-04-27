@@ -29,6 +29,18 @@ Ce projet est pour nous une première étape vers la création d'une vraie plate
 
 ## ⚡ Requetes SQL
 
+### Sommaire
+
+- [ 🎥 Titre et date de sorite de films du plus récent au plus ancien](#-les-titres-et-dates-de-sortie-des-films-du-plus-récent-au-plus-ancien)
+- [👨‍🎤 Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique](#-les-noms-prénoms-et-âges-des-acteursactrices-de-plus-de-30-ans-dans-lordre-alphabétique)
+- [🌟 La liste des acteurs/actrices principaux pour un film donné](#-la-liste-des-acteursactrices-principaux-pour-un-film-donné)
+- [🎭 La liste des films pour un acteur/actrice donné](#-la-liste-des-films-pour-un-acteuractrice-donné)
+- [➕ Ajouter un film](#-ajouter-un-film)
+- [➕ Ajouter un acteur/actrice](#-ajouter-un-acteuractrice)
+- [🔄 Modifier un film](#-modifier-un-film)
+- [🗑️ Supprimer un acteur/actrice](#️-supprimer-un-acteuractrice)
+- [🕒 Afficher les 3 derniers acteurs/actrices ajouté(e)s](#-afficher-les-3-derniers-acteursactrices-ajoutées)
+
 ### 🎥 Les titres et dates de sortie des films du plus récent au plus ancien
 
 ```sql
