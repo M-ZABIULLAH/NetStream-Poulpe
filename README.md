@@ -11,6 +11,7 @@
 - [📜 Script SQL](./script-sql.md)
 - [📝 Contexte](#contexte-du-projet)
 - [⚡ Requêtes SQL](#requetes-sql)
+- [## 👥 Contributeurs](#-contributeurs)
 
 ## 📝 Contexte du projet
 
@@ -117,3 +118,11 @@ WHERE actor_id = '8b5b3470-264c-46d5-82f3-3e840b34a6b9';
 ```sql
 SELECT * FROM actor ORDER BY created_at DESC LIMIT 3;
 ```
+
+## 👥 Contributeurs
+
+Ce projet a été réalisé par :
+
+- VMOHAMMADI Zabiullah (@M-ZABIULLAH)
+- HOUAIRI Axel (@axelhri)
+- DUFOUR Jody (@joydfr)
