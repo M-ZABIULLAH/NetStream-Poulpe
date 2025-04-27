@@ -9,8 +9,23 @@
 - [Photo MPD](./Picture-MCD-MLD-MPD/mpd.png)
 - [Choix du SGBD](./choice-of-SGBD.md)
 - [Script SQL](./script-sql.md)
-- [Contexte](#contexte)
+- [Contexte](#contexte-du-projet)
 - [Requetes SQL](#requetes-sql)
+
+## Contexte du projet
+
+Nous sommes une équipe de trois développeurs passionnés de cinéma, curieux des coulisses et fascinés par la diversité des œuvres accessibles grâce aux plateformes de streaming.
+
+Sur notre temps libre, nous avons décidé de créer notre propre plateforme. Mais avant de construire un site web complet, nous commençons par sa conception et sa mise en place de la base de données.
+
+Nous avons par conséquant:
+
+- Recenser les données nécessaires dans un dictionnaire de données.
+- Concevoir la base avec la méthode MERISE : MCD, MLD, MPD.
+- Écrire les requêtes SQL pour interagir avec nos données.
+- Mettre en place des procédures stockées et déclencheurs pour automatiser les actions courantes.
+
+Ce projet est pour nous une première étape vers la création d’une vraie plateforme de découverte cinématographique.
 
 ## Requetes SQL
 
