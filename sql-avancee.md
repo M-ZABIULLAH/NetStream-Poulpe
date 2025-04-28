@@ -235,3 +235,22 @@ AFTER UPDATE ON cinephile
 FOR EACH ROW
 EXECUTE FUNCTION cinephile_logs();
 ```
+
+### Trigger pour la colonne updated_at
+
+```SQL
+CREATE OR REPLACE FUNCTION update_logs()
+RETURNS TRIGGER AS $$
+BEGIN
+   NEW.updated_at = CURRENT_TIMESTAMP;
+   RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+```SQL
+CREATE TRIGGER actor_update_logs
+BEFORE UPDATE ON actor
+FOR EACH ROW
+EXECUTE FUNCTION update_logs();
+```
