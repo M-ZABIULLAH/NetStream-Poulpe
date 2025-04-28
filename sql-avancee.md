@@ -120,6 +120,10 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
+```SQL
+SELECT * from get_director_movie('f43ac5dd-2d37-4766-a3ee-1de1f05f2aa6');
+```
+
 ### Créer un acteur et lui assigné un personnage puis l'ajouter dans un film
 
 ```SQL
