@@ -107,15 +107,15 @@ CALL delete_actor('d4f2e6b1-1654-4f9f-9b98-ce4ea95ee957');
 ### Voir les films d'un réalisateur donné
 
 ```SQL
-CREATE OR REPLACE FUNCTION get_director_movie(director_id UUID)
+CREATE OR REPLACE FUNCTION get_director_movie(p_director_id UUID)
 RETURNS TABLE(director_firstname VARCHAR, director_lastname VARCHAR ,movie_title VARCHAR, movie_release_date DATE) AS
 $$
 BEGIN
     RETURN QUERY
     SELECT d.director_firstname, d.director_lastname, m.movie_title, m.movie_release_date
-    FROM director d
-    JOIN movie m ON d.director_id = m.direcor_id
-    WHERE d.director_id = p.director_id;
+    FROM movie m
+    JOIN director d ON d.director_id = m.director_id
+	WHERE m.director_id = p_director_id;
 END;
 $$ LANGUAGE plpgsql;
 ```
