@@ -132,7 +132,7 @@ EXECUTE FUNCTION cinephile_logs();
 
 ### 8.1. Exportation
 ```bash
-pg_dump -h 10.2.0.76 -U jody -d netstream -F c -f base-de-donnee-netstream.backup
+pg_dump -h 10.2.0.76 -User -d netstream -F c -f base-de-donnee-netstream.backup
 ```
 
 ### 8.2. Restauration
