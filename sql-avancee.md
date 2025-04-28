@@ -104,6 +104,22 @@ CALL delete_actor('d4f2e6b1-1654-4f9f-9b98-ce4ea95ee957');
 
 ## Commandes diverses
 
+### Voir les films d'un réalisateur donné
+
+```SQL
+CREATE OR REPLACE FUNCTION get_director_movie(director_id UUID)
+RETURNS TABLE(director_firstname VARCHAR, director_lastname VARCHAR ,movie_title VARCHAR, movie_release_date DATE) AS
+$$
+BEGIN
+    RETURN QUERY
+    SELECT d.director_firstname, d.director_lastname, m.movie_title, m.movie_release_date
+    FROM director d
+    JOIN movie m ON d.director_id = m.direcor_id
+    WHERE d.director_id = p.director_id;
+END;
+$$ LANGUAGE plpgsql;
+```
+
 ### Créer un acteur et lui assigné un personnage puis l'ajouter dans un film
 
 ```SQL
