@@ -124,6 +124,31 @@ $$ LANGUAGE plpgsql;
 SELECT * from get_director_movie('f43ac5dd-2d37-4766-a3ee-1de1f05f2aa6');
 ```
 
+### Lier un acteur à un personnage et à un film
+
+```SQL
+CREATE PROCEDURE add_actor_to_movie(
+IN p_actor_id UUID,
+IN p_character_id UUID,
+IN p_movie_id UUID
+)
+AS $$
+BEGIN
+
+INSERT INTO acting (actor_id,character_id)
+VALUES (p_actor_id, p_character_id);
+
+INSERT INTO movie_characters (movie_id, character_id)
+VALUES (p_movie_id, p_character_id);
+
+END;
+$$ language plpgsql;
+```
+
+```SQL
+call add_actor_to_movie('ad9386f1-6447-4bc4-858d-37ca7d968076','5a3a21e4-dbfc-406b-aab1-bb189daf9ea9','5c38d0c4-c470-4df3-8d7b-07326b77a670');
+```
+
 ### Créer un acteur et lui assigné un personnage puis l'ajouter dans un film
 
 ```SQL
@@ -209,4 +234,23 @@ CREATE TRIGGER cinephile_trigger
 AFTER UPDATE ON cinephile
 FOR EACH ROW
 EXECUTE FUNCTION cinephile_logs();
+```
+
+### Trigger pour la colonne updated_at
+
+```SQL
+CREATE OR REPLACE FUNCTION update_logs()
+RETURNS TRIGGER AS $$
+BEGIN
+   NEW.updated_at = CURRENT_TIMESTAMP;
+   RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+```SQL
+CREATE TRIGGER actor_update_logs
+BEFORE UPDATE ON actor
+FOR EACH ROW
+EXECUTE FUNCTION update_logs();
 ```
