@@ -59,23 +59,26 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 ### 6.1. Table `cinephile`
 ```sql
-CREATE TABLE cinephile (
-    cinephile_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    cinephile_firstname VARCHAR(50),
-    cinephile_lastname VARCHAR(50),
-    cinephile_mail VARCHAR(128),
-    cinephile_password VARCHAR(64)
+CREATE TABLE cinephile(
+   cinephile_id UUID PRIMARY KEY,
+   cinephile_firstname VARCHAR(50),
+   cinephile_lastname VARCHAR(50),
+   cinephile_mail VARCHAR(128),
+   cinephile_password VARCHAR(64),
+   created_at DEFAULT CURRENT_TIMESTAMP,
+   updated_at DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
 ### 6.2. Table `archive`
 ```sql
-CREATE TABLE archive (
-    archive_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    cinephile_id UUID,
-    archive_oldvalue VARCHAR(255),
-    archive_newvalue VARCHAR(255),
-    archive_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE archive(
+   archive_id UUID PRIMARY KEY,
+   archive_newvalue VARCHAR(50),
+   archive_oldvalue VARCHAR(50),
+   archive_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   cinephile_id UUID NOT NULL,
+   FOREIGN KEY(cinephile_id) REFERENCES cinephile(cinephile_id)
 );
 ```
 
@@ -85,6 +88,7 @@ CREATE TABLE archive (
 
 ### 7.1. Fonction de trigger
 ```sql
+
 CREATE OR REPLACE FUNCTION cinephile_logs()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -112,6 +116,15 @@ BEGIN
             OLD.cinephile_mail,
             NEW.cinephile_id
         );
+		 ELSIF NEW.cinephile_password IS DISTINCT FROM OLD.cinephile_password THEN
+        INSERT INTO archive (archive_id, archive_newvalue, archive_oldvalue, cinephile_id)
+        VALUES (
+            gen_random_uuid(),
+            NEW.cinephile_password,
+            OLD.cinephile_password,
+            NEW.cinephile_id
+        );
+
     END IF;
     RETURN NEW;
 END;
@@ -120,6 +133,7 @@ $$ language plpgsql;
 
 ### 7.2. Trigger
 ```sql
+
 CREATE TRIGGER cinephile_trigger
 AFTER UPDATE ON cinephile
 FOR EACH ROW
