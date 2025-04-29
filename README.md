@@ -5,12 +5,15 @@
 - [📋 Règle de gestion](./management-rule.md)
 - [📚 Dictionnaire de données](./data-dictionary.md)
 - [🔍 Photo MCD](./Picture-MCD-MLD-MPD/mcd.png)
-- [🔍 Photo MLD](./Picture-MCD-MLD-MPD/MLD.png)
+- [🔍 Photo MLD](./Picture-MCD-MLD-MPD/mld.png)
 - [🔍 Photo MPD](./Picture-MCD-MLD-MPD/mpd.png)
 - [💾 Choix du SGBD](./choice-of-SGBD.md)
 - [📜 Script SQL](./script-sql.md)
-- [📝 Contexte](#contexte-du-projet)
-- [⚡ Requêtes SQL](#requetes-sql)
+- [ Crud SQL Avancee](./sql-avancee.md)
+- [Documentation](./Documentation.md)
+- [Documentation rétention de sauvegarde](./Documenting-the-backup-rentention-policy.md)
+- [📝 Contexte](#📝-contexte-du-projet)
+- [⚡ Requêtes SQL](#⚡-Requetes-SQL)
 - [## 👥 Contributeurs](#-contributeurs)
 
 ## 📝 Contexte du projet
