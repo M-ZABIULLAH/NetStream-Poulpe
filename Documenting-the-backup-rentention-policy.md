@@ -32,8 +32,10 @@ L’objectif est de garantir la **disponibilité**, **l’intégrité** et la **
 - Fréquence : Une sauvegarde complète chaque jour à minuit
 
 ```bash
-10 12 * * * /bin/bash -c /usr/bin/pg_dump -U axel -d netstream -F c -f ~/Desktop/netstream-dump/netstream_$(date +\%F).backup
-10 12 * * * /bin/bash -c /usr/bin/pg_dump -U axel -d netstream --schema-only -f ~/Desktop/netstream-dump/netstream_$(date +\%F).sql
+# Pour la sauvegarde automatique des données
+0 0 * * * /bin/bash -c /usr/bin/pg_dump -U axel -d netstream -F c -f ~/Desktop/netstream-dump/netstream_$(date +\%F).backup
+# Pour la sauvegarde automatique du schéma
+0 0 * * * /bin/bash -c /usr/bin/pg_dump -U axel -d netstream --schema-only -f ~/Desktop/netstream-dump/netstream_$(date +\%F).sql
 `
 ```
 
