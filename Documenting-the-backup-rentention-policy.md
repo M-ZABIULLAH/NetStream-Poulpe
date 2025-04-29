@@ -1,9 +1,8 @@
-# Documentation de rétention de sauvegarde
+# 📋 Documentation de rétention de sauvegarde
 
 ## 🎯 1 Objectif
 
-Tout plan de sauvegarde solide repose sur une **politique de rétention des sauvegardes**, qui définit la durée pendant laquelle les données de sauvegarde doivent être **conservées avant d’être archivées, écrasées ou supprimées**.
-
+Tout plan de sauvegarde solide repose sur une **politique de rétention des sauvegardes**, qui définit la durée pendant laquelle les données de sauvegarde doivent être **conservées avant d'être archivées, écrasées ou supprimées**.
 Cette politique est déterminée selon les critères suivants :
 
 - Quels types de données sont sauvegardés
@@ -11,85 +10,92 @@ Cette politique est déterminée selon les critères suivants :
 - Combien de temps chaque sauvegarde est conservée
 - Comment et où les sauvegardes sont stockées
 - Qui a accès aux sauvegardes
-- Comment les données sont restaurées en cas d’incident
+- Comment les données sont restaurées en cas d'incident
+  L'objectif est de garantir la **disponibilité**, **l'intégrité** et la **restauration rapide des données**, tout en respectant les **contraintes de sécurité**, de **confidentialité** et de **conformité réglementaire**.
 
-L’objectif est de garantir la **disponibilité**, **l’intégrité** et la **restauration rapide des données**, tout en respectant les **contraintes de sécurité**, de **confidentialité** et de **conformité réglementaire**.
-
-## 2 Périmètre
+## 🔍 2 Périmètre
 
 - Application concernée : Netstream
 - Base de données : PostgresSQL
 
-## 3 Responsabilités
+## 👥 3 Responsabilités
 
 - Personne responsable de la sauvegarde : Administrateur
 - Personne ayant les privilèges d'accès : Administrateur
 - Contact en cas d'incident : Administrateur
 
-## 4 Stratégie de sauvergarde
+## 💾 4 Stratégie de sauvergarde
 
 - Type de sauvegarde : Complète
 - Fréquence : Une sauvegarde complète chaque jour à minuit
 
 ```bash
 # Pour la sauvegarde automatique des données
-0 0 * * * /bin/bash -c /usr/bin/pg_dump -U axel -d netstream -F c -f ~/Desktop/netstream-dump/netstream_$(date +\%F).backup
+0 0 * ** /bin/bash -c /usr/bin/pg_dump -U axel -d netstream -F c -f ~/Desktop/netstream-dump/netstream_$(date +\%F).backup
 # Pour la sauvegarde automatique du schéma
-0 0 * * * /bin/bash -c /usr/bin/pg_dump -U axel -d netstream --schema-only -f ~/Desktop/netstream-dump/netstream_$(date +\%F).sql
-`
+0 0 * ** /bin/bash -c /usr/bin/pg_dump -U axel -d netstream --schema-only -f ~/Desktop/netstream-dump/netstream_$(date +\%F).sql
 ```
 
 - Méthode : Script Pg_dump , Automatisation via cron , utilisation d'un trigger entre cinephile et archives (journalisation de modification des données cinéphiles)
 
-## 5 Rétention
+## ⏱️ 5 Rétention
 
 Durée de conservation :
 
 - Sauvegarde quotidiennes : 15 jours.
-
-Rotation :
-
+  Rotation :
 - Méthode de suppression automatique (script, cron)
 
-## 6 Sécurité
+## 🔒 6 Sécurité
 
 - Accès restreint: Seul l'administrateur possède les droit d'accès aux fichiers de sauvegarde
 - Chiffrement des sauvegardes : non
 - Droits sur la base PostgreSQL : utilisateur restreint aux opérations de lecture
 
-## 7 Test de restauration
+## 🧪 7 Test de restauration
 
 - Fréquence des tests de restauration : 1 fois par mois
 - Procédure
 - 📁 Chemin d'accès au sauvegarde
-  - Sauvegarde journalière : $HOME/backups
+- Sauvegarde journalière : $HOME/backups
 - 🛠️ Prodédure de restauration PostgreSQL
-  - 1 Choisir une sauvegarde pour test
-  ```bash
-  cd $HOME/backups
-  ls
-  ```
-  ```bash
-  netstream_backup_2025-04-28_14-17-06.dump
-  ```
-  - 2 Créer une base temporaire
-  ```bash
-  createdb netstream_test
-  ```
-  - 3 Restaurer dans cette base
-  ```bash
-  pg_restore -d netstream_test /tmp/netstream_restored.dump
-  ```
-  - 4 Vérification manuelle (optionnelle mais vivement conseillé)
-  ```bash
-  psql netsream_test
-  ```
-  ```sql
-  \dt
-  SELECT COUNT(*) FROM acting;
-  ```
-  - 5 si tout est OK nettoyage
-  ```bash
-  dropdb netstream_test
-  rm/tmp/netstream_restored.dump
-  ```
+- 1 Choisir une sauvegarde pour test
+
+```bash
+cd $HOME/backups
+ls
+```
+
+```bash
+netstream_backup_2025-04-28_14-17-06.dump
+```
+
+- 2 Créer une base temporaire
+
+```bash
+createdb netstream_test
+```
+
+- 3 Restaurer dans cette base
+
+```bash
+pg_restore -d netstream_test /tmp/netstream_restored.dump
+```
+
+- 4 Vérification manuelle (optionnelle mais vivement conseillé)
+
+```bash
+psql netsream_test
+```
+
+```sql
+\dt
+SELECT COUNT(*) FROM acting;
+```
+
+- 5 si tout est OK nettoyage
+
+```bash
+dropdb netstream_test
+rm/tmp/netstream_restored.dump
+```
