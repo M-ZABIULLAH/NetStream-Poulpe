@@ -61,22 +61,23 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 ```sql
 CREATE TABLE cinephile(
    cinephile_id UUID PRIMARY KEY,
-   cinephile_firstname VARCHAR(50),
-   cinephile_lastname VARCHAR(50),
-   cinephile_mail VARCHAR(128),
-   cinephile_password VARCHAR(64),
-   created_at DEFAULT CURRENT_TIMESTAMP,
-   updated_at DEFAULT CURRENT_TIMESTAMP
+   cinephile_firstname VARCHAR(50) NOT NULL,
+   cinephile_lastname VARCHAR(50) NOT NULL,
+   cinephile_mail VARCHAR(128) NOT NULL UNIQUE,
+   cinephile_password VARCHAR(64) NOT NULL,
+   created_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
+   updated_at DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 ```
 
 ### 6.2. Table `archive`
 ```sql
+
 CREATE TABLE archive(
    archive_id UUID PRIMARY KEY,
-   archive_newvalue VARCHAR(50),
-   archive_oldvalue VARCHAR(50),
-   archive_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   archive_newvalue VARCHAR(50) NOT NULL,
+   archive_oldvalue VARCHAR(50) NOT NULL,
+   archive_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
    cinephile_id UUID NOT NULL,
    FOREIGN KEY(cinephile_id) REFERENCES cinephile(cinephile_id)
 );
