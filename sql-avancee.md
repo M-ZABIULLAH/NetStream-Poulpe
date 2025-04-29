@@ -223,6 +223,15 @@ BEGIN
             OLD.cinephile_mail,
             NEW.cinephile_id
         );
+		 ELSIF NEW.cinephile_password IS DISTINCT FROM OLD.cinephile_password THEN
+        INSERT INTO archive (archive_id, archive_newvalue, archive_oldvalue, cinephile_id)
+        VALUES (
+            gen_random_uuid(),
+            NEW.cinephile_password,
+            OLD.cinephile_password,
+            NEW.cinephile_id
+        );
+
     END IF;
     RETURN NEW;
 END;
