@@ -32,7 +32,9 @@ L’objectif est de garantir la **disponibilité**, **l’intégrité** et la **
 - Fréquence : Une sauvegarde complète chaque jour à minuit
 
 ```bash
-
+10 12 * * * /bin/bash -c /usr/bin/pg_dump -U axel -d netstream -F c -f ~/Desktop/netstream-dump/netstream_$(date +\%F).backup
+10 12 * * * /bin/bash -c /usr/bin/pg_dump -U axel -d netstream --schema-only -f ~/Desktop/netstream-dump/netstream_$(date +\%F).sql
+`
 ```
 
 - Méthode : Script Pg_dump , Automatisation via cron , utilisation d'un trigger entre cinephile et archives (journalisation de modification des données cinéphiles)
