@@ -8,8 +8,8 @@ CREATE TABLE actor(
    actor_firstname VARCHAR(50) NOT NULL,
    actor_lastname VARCHAR(50) NOT NULL,
    actor_birthdate DATE NOT NULL,
-   created_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   updated_at DEFAULT CURRENT_TIMESTAMP NOT NULL
+   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
@@ -20,8 +20,8 @@ CREATE TABLE director(
    director_id UUID PRIMARY KEY,
    director_firstname VARCHAR(50) NOT NULL,
    director_lastname VARCHAR(50) NOT NULL,
-   created_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   updated_at DEFAULT CURRENT_TIMESTAMP NOT NULL
+   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
@@ -32,8 +32,8 @@ CREATE TABLE character(
    character_id UUID PRIMARY KEY,
    character_name VARCHAR(50) NOT NULL,
    character_type VARCHAR(50) NOT NULL,
-   created_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   updated_at DEFAULT CURRENT_TIMESTAMP NOT NULL
+   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
@@ -44,7 +44,7 @@ CREATE TABLE archive(
    archive_id UUID PRIMARY KEY,
    archive_newvalue VARCHAR(50) NOT NULL,
    archive_oldvalue VARCHAR(50) NOT NULL,
-   archive_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+   archive_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    cinephile_id UUID NOT NULL,
    FOREIGN KEY(cinephile_id) REFERENCES cinephile(cinephile_id)
 );
@@ -59,8 +59,8 @@ CREATE TABLE movie(
    movie_release_date DATE NOT NULL,
    movie_length TIME NOT NULL,
    director_id UUID NOT NULL,
-   created_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   updated_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
+   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    FOREIGN KEY(director_id) REFERENCES director(director_id)
 );
 ```
@@ -74,8 +74,8 @@ CREATE TABLE cinephile(
    cinephile_lastname VARCHAR(50) NOT NULL,
    cinephile_mail VARCHAR(128) NOT NULL UNIQUE,
    cinephile_password VARCHAR(64) NOT NULL,
-   created_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   updated_at DEFAULT CURRENT_TIMESTAMP NOT NULL
+   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
@@ -85,8 +85,8 @@ CREATE TABLE cinephile(
 CREATE TABLE acting(
    actor_id UUID NOT NULL,
    character_id UUID NOT NULL,
-   created_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   updated_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
+   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY(actor_id, character_id),
    FOREIGN KEY(actor_id) REFERENCES actor(actor_id),
    FOREIGN KEY(character_id) REFERENCES character(character_id)
@@ -99,8 +99,8 @@ CREATE TABLE acting(
 CREATE TABLE movie_bookmark(
    movie_id UUID NOT NULL,
    cinephile_id UUID NOT NULL,
-   created_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   updated_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
+   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY(movie_id, cinephile_id),
    FOREIGN KEY(movie_id) REFERENCES movie(movie_id),
    FOREIGN KEY(cinephile_id) REFERENCES cinephile(cinephile_id)
@@ -113,8 +113,8 @@ CREATE TABLE movie_bookmark(
 CREATE TABLE movie_characters(
    movie_id UUID NOT NULL,
    character_id UUID NOT NULL,
-   created_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   updated_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
+   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY(movie_id, character_id),
    FOREIGN KEY(movie_id) REFERENCES movie(movie_id),
    FOREIGN KEY(character_id) REFERENCES character(character_id)
@@ -127,8 +127,8 @@ CREATE TABLE movie_characters(
 CREATE TABLE character_bookmark(
    cinephile_id UUID NOT NULL,
    character_id UUID NOT NULL,
-   created_at DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   updated_at DEFAULT CURRENT_TIMESTAMP NOT NULL
+   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY(cinephile_id, character_id),
    FOREIGN KEY(cinephile_id) REFERENCES cinephile(cinephile_id),
    FOREIGN KEY(character_id) REFERENCES character(character_id)
