@@ -22,14 +22,19 @@ L’objectif est de garantir la **disponibilité**, **l’intégrité** et la **
 
 ## 3 Responsabilités
 
-- Personne responsable de la sauvegarde : Jody
-- Personne ayant les privilèges d'accès : Axel
-- Contact en cas d'incident : Axel
+- Personne responsable de la sauvegarde : Administrateur
+- Personne ayant les privilèges d'accès : Administrateur
+- Contact en cas d'incident : Administrateur
 
 ## 4 Stratégie de sauvergarde
 
 - Type de sauvegarde : Complète
 - Fréquence : Une sauvegarde complète chaque jour à minuit
+
+```bash
+
+```
+
 - Méthode : Script Pg_dump , Automatisation via cron , utilisation d'un trigger entre cinephile et archives (journalisation de modification des données cinéphiles)
 
 ## 5 Rétention
