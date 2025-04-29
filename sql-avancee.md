@@ -254,3 +254,63 @@ BEFORE UPDATE ON actor
 FOR EACH ROW
 EXECUTE FUNCTION update_logs();
 ```
+
+### Filtrer les personnages favoris des cinephiles
+
+```SQL
+SELECT ci.cinephile_firstname, ci.cinephile_lastname, c.character_name
+FROM cinephile ci
+JOIN character_bookmark cb ON ci.cinephile_id = cb.cinephile_id
+JOIN character c ON c.character_id = cb.character_id;
+```
+
+### Filtrer les personnages favoris d'un cinephile donné
+
+```SQL
+CREATE OR REPLACE FUNCTION cinephile_fav_character(p_cinephile_id UUID)
+RETURNS TABLE(cinephile_firstname VARCHAR, cinephile_lastname VARCHAR ,character_name VARCHAR) AS
+$$
+BEGIN
+    RETURN QUERY
+	SELECT ci.cinephile_firstname, ci.cinephile_lastname, c.character_name
+	FROM cinephile ci
+	JOIN character_bookmark cb ON ci.cinephile_id = cb.cinephile_id
+	JOIN character c ON c.character_id = cb.character_id
+	WHERE ci.cinephile_id = p_cinephile_id;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+```SQL
+SELECT * FROM cinephile_fav_character('a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d');
+```
+
+### Filtrer les films favoris des cinephiles
+
+```SQL
+SELECT cinephile_firstname, cinephile_lastname, movie_title
+FROM cinephile ci
+JOIN movie_bookmark mb ON ci.cinephile_id = mb.cinephile_id
+JOIN movie m ON m.movie_id = mb.movie_id;
+```
+
+### Filtrer les films favoris d'un cinephile donné
+
+```SQL
+CREATE OR REPLACE FUNCTION cinephile_fav_movie(p_cinephile_id UUID)
+RETURNS TABLE(cinephile_firstname VARCHAR, cinephile_lastname VARCHAR ,movie_title VARCHAR) AS
+$$
+BEGIN
+    RETURN QUERY
+	SELECT ci.cinephile_firstname, ci.cinephile_lastname, m.movie_title
+	FROM cinephile ci
+	JOIN movie_bookmark mb ON ci.cinephile_id = mb.cinephile_id
+	JOIN movie m ON m.movie_id = mb.movie_id
+	WHERE ci.cinephile_id = p_cinephile_id;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+```SQL
+SELECT * FROM cinephile_fav_movie('a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d');
+```
