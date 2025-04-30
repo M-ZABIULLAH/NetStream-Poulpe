@@ -1,8 +1,7 @@
-
-
 # Installation et Configuration de la Base de Données
 
 ## 1. Introduction
+
 Cette documentation décrit toutes les étapes nécessaires pour installer, configurer et préparer la base de données utilisée pour le brief NetStream (Plateforme de streaming).  
 La base de données choisie est **PostgreSQL**, un SGBDR open-source et sécurisé.
 
@@ -20,9 +19,11 @@ La base de données choisie est **PostgreSQL**, un SGBDR open-source et sécuris
 ## 3. Installation de PostgreSQL
 
 ### 3.1. Téléchargement
+
 - Site officiel : [https://www.postgresql.org/download/](https://www.postgresql.org/download/)
 
 ### 3.2. Procédure
+
 - Lancez l’installeur.
 - Définissez un mot de passe pour `postgres`.
 - Laissez le port par défaut (5432).
@@ -33,11 +34,13 @@ La base de données choisie est **PostgreSQL**, un SGBDR open-source et sécuris
 ## 4. Configuration initiale
 
 ### 4.1. Connexion
+
 ```bash
-pgcli -h 10.2.0.76 -U User -d netstream 
+pgcli -h 10.2.0.76 -U User -d netstream
 ```
 
 ### 4.2. Création de la base et de l'utilisateur
+
 ```sql
 CREATE DATABASE NetStream_db;
 CREATE USER NetStream_user WITH PASSWORD 'motdepass';
@@ -58,6 +61,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 ## 6. Création des Tables
 
 ### 6.1. Table `cinephile`
+
 ```sql
 CREATE TABLE cinephile(
    cinephile_id UUID PRIMARY KEY,
@@ -71,6 +75,7 @@ CREATE TABLE cinephile(
 ```
 
 ### 6.2. Table `archive`
+
 ```sql
 
 CREATE TABLE archive(
@@ -88,6 +93,7 @@ CREATE TABLE archive(
 ## 7. Fonction et Trigger
 
 ### 7.1. Fonction de trigger
+
 ```sql
 
 CREATE OR REPLACE FUNCTION cinephile_logs()
@@ -133,6 +139,7 @@ $$ language plpgsql;
 ```
 
 ### 7.2. Trigger
+
 ```sql
 
 CREATE TRIGGER cinephile_trigger
@@ -146,20 +153,57 @@ EXECUTE FUNCTION cinephile_logs();
 ## 8. Sauvegarde et Restauration
 
 ### 8.1. Exportation
+
 ```bash
 pg_dump -h 10.2.0.76 -User -d netstream -F c -f base-de-donnee-netstream.backup
 ```
 
 ### 8.2. Restauration
+
 ```bash
 psql -pg_restore -d ma_base sauvegarde.dump
 ```
 
+### 8.3. Sauvegarde automatisé
+
+Script dans le fichier **backup.sh** :
+
+```bash
+#!/bin/bash
+
+# Répertoire
+BACKUP_DIR="$HOME/Desktop/netstream-dump"
+
+# Variables
+DB_NAME="netstream"
+DATE=$(date +"%Y-%m-%d_%H-%M-%S")
+FILENAME="${DB_NAME}_backup_${DATE}.backup"
+
+# Mot de passe de l'utilisateur psql
+export PGPASSWORD="admin"
+
+# Sauvegarde
+pg_dump -U administrator -d "$DB_NAME" -F c -f "$BACKUP_DIR/$FILENAME"
+
+# Nettoyage des sauvegardes de plus de 15 jours
+find "$BACKUP_DIR" -type f -name "*.dump" -mtime +15 -delete
+```
+
+Fichier contenant le mot de passe psql de l'utilisateur administrator :
+
+```bash
+localhost:5432:netstream:administrator:admin
+```
+
+**cron** :
+
+```bash
+00 00 * * * /bin/bash $HOME/Desktop/netstream-dump/backup.sh
+```
+
 ---
 
-
 ## 9. Conclusion
-
 
 Toutes les modifications importantes des utilisateurs seront archivées automatiquement pour garantir la traçabilité.
 
