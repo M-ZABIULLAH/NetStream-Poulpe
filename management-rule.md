@@ -1,47 +1,76 @@
 # Règles de gestion
 
-## Movie
 
-**RG :** Un film doit avoir un titre.
-**RG :** Un film doit avoir un acteur.
-**RG :** Un film peut avoir plusieurs acteurs.
-**RG :** Un film doit avoir un réalisateur.
-**RG :** Un film doit avoir une année de sortie.
-**RG :** Un film doit avoir une durée.
+###  **Movie**
+```
+| Code   | Règle de gestion                                      |
+|--------|-------------------------------------------------------|
+| RG-1   | Un film doit avoir un titre.                          |
+| RG-2   | Un film doit avoir un acteur.                         |
+| RG-3   | Un film peut avoir plusieurs acteurs.                 |
+| RG-4   | Un film doit avoir un réalisateur.                    |
+| RG-5   | Un film doit avoir une année de sortie.               |
+| RG-6   | Un film doit avoir une durée.                         |
+```
 
-## Actor
+---
 
-**RG :** chaque acteur a un prénom.
-**RG :** Chaque acteur a un nom.
-**RG :** Chaque acteur a une date de naissance.
-**RG :** Chaque acteur a un rôle dans un film.
-**RG :** Un acteur peut jouer dans plusieurs films.
+### **Actor**
+```
+| Code   | Règle de gestion                                      |
+|--------|-------------------------------------------------------|
+| RG-7   | Chaque acteur a un prénom.                            |
+| RG-8   | Chaque acteur a un nom.                               |
+| RG-9   | Chaque acteur a une date de naissance.                |
+| RG-10  | Chaque acteur a un rôle dans un film.                 |
+| RG-11  | Un acteur peut jouer dans plusieurs films.            |
+```
 
-## Director
+---
 
-**RG :** Un réalisateur doit avoir un nom.
-**RG :** Un réalisateur doit avoir un prénom.
-**RG :** Un réalisateur peut être lié à plusieurs films.
+### **Director**
+```
+| Code   | Règle de gestion                                      |
+|--------|-------------------------------------------------------|
+| RG-12  | Un réalisateur doit avoir un nom.                     |
+| RG-13  | Un réalisateur doit avoir un prénom.                  |
+| RG-14  | Un réalisateur peut être lié à plusieurs films.       |
+```
 
-## Cinephile
+---
 
-**RG :** Un cinéphile doit avoir un nom.
-**RG :** Un cinéphile doit avoir un prénom.
-**RG :** Un cinéphile doit avoir un mail.
-**RG :** Un cinéphile doit avoir un mot de passe.
-**RG :** Un cinéphile peut lister des rôles et films préférés.
-**RG :** Un cinéphile peut mettre a jour ses informations.
+### **Cinéphile**
+```
+| Code   | Règle de gestion                                      |
+|--------|-------------------------------------------------------|
+| RG-15  | Un cinéphile doit avoir un nom.                       |
+| RG-16  | Un cinéphile doit avoir un prénom.                    |
+| RG-17  | Un cinéphile doit avoir un mail.                      |
+| RG-18  | Un cinéphile doit avoir un mot de passe.              |
+| RG-19  | Un cinéphile peut lister des rôles et films préférés. |
+| RG-20  | Un cinéphile peut mettre à jour ses informations.     |
+```
 
-## Character
+---
 
-**RG :** Un rôle doit avoir un nom.
-**RG :** Un rôle doit avoir un type.
-**RG :** Un rôle doit être lié à un ou plusieurs acteur(s).
-**RG :** Un rôle doit être lié à un ou plusieurs film(s).
+### **Character (Rôle)**
+```
+| Code   | Règle de gestion                                      |
+|--------|-------------------------------------------------------|
+| RG-21  | Un rôle doit avoir un nom.                            |
+| RG-22  | Un rôle doit avoir un type.                           |
+| RG-23  | Un rôle doit être lié à un ou plusieurs acteur(s).    |
+| RG-24  | Un rôle doit être lié à un ou plusieurs film(s).      |
+```
 
-## Archive
+---
 
-**RG :** Une archive doit contenir une ancienne donnée.
-**RG :** Une archive doit contenir une nouvelle donnée.
-**RG :** Une archive doit contenir une date de modification.
-**RG :** Une archive doit lié un cinéphile.
+### **Archive**
+```
+| Code   | Règle de gestion                                      |
+|--------|-------------------------------------------------------|
+| RG-25  | Une archive doit contenir une ancienne donnée.        |
+| RG-26  | Une archive doit contenir une nouvelle donnée.        |
+| RG-27  | Une archive doit contenir une date de modification.   |
+| RG-28  | Une archive doit lier un cinéphile.                   |
+```
