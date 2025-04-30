@@ -155,13 +155,21 @@ EXECUTE FUNCTION cinephile_logs();
 ### 8.1. Exportation
 
 ```bash
-pg_dump -h 10.2.0.76 -User -d netstream -F c -f base-de-donnee-netstream.backup
+pg_dump -U administrator -d netstream -f fichier.sql
 ```
 
 ### 8.2. Restauration
 
+- Restauration de l'exportation
+
 ```bash
-psql -pg_restore -d ma_base sauvegarde.dump
+psql -U administrator -d netstream -f fichier.sql
+```
+
+- Avec .backup requiert pg_restore pour être restauré
+
+```bash
+pg_restore -U administrator -d netstream /chemin/vers/le_fichier.backup
 ```
 
 ### 8.3. Sauvegarde automatisé
@@ -186,7 +194,7 @@ export PGPASSWORD="admin"
 pg_dump -U administrator -d "$DB_NAME" -F c -f "$BACKUP_DIR/$FILENAME"
 
 # Nettoyage des sauvegardes de plus de 15 jours
-find "$BACKUP_DIR" -type f -name "*.dump" -mtime +15 -delete
+find "$BACKUP_DIR" -type f -name "*.backup" -mtime +15 -delete
 ```
 
 Fichier contenant le mot de passe psql de l'utilisateur administrator :
