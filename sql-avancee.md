@@ -16,16 +16,17 @@ BEGIN
     INSERT INTO actor (actor_id, actor_firstname, actor_lastname, actor_birthdate)
     VALUES (p_actor_id, p_actor_firstname, p_actor_lastname, p_actor_birthdate);
 END;
-$$ language plpgsql;
+$$ LANGUAGE plpgsql;
 ```
 
 ```SQL
-call add_actor(
+CALL create_actor(
 gen_random_uuid(),
-'Axel',
-'Houairi',
-'2000-04-03'
+'Freya',
+'Allan',
+'2001-09-06'
 );
+
 ```
 
 ### READ
@@ -51,7 +52,7 @@ $$ LANGUAGE plpgsql;
 ```
 
 ```SQL
-SELECT * FROM get_actor('d4f2e6b1-1654-4f9f-9b98-ce4ea95ee957');
+SELECT * FROM get_actor('e5f6a7b8-c9d0-1e2f-3a4b-5c6d7e8f9a0b');
 ```
 
 ### UPDATE
@@ -72,12 +73,12 @@ BEGIN
         actor_birthdate = COALESCE(p_actor_birthdate, actor_birthdate)
     WHERE actor_id = p_actor_id;
 END;
-$$ language plpgsql;
+$$ LANGUAGE plpgsql;
 ```
 
 ```SQL
 CALL update_actor(
-    '38cdeef0-10d4-48a9-9297-6bc8dd8c51f9',
+    'e5f6a7b8-c9d0-1e2f-3a4b-5c6d7e8f9a0b',
     'Armin',
     'Dejaeger',
     NULL
@@ -95,7 +96,7 @@ BEGIN
     DELETE FROM actor
     WHERE actor_id = p_actor_id;
 END;
-$$ language plpgsql;
+$$ LANGUAGE plpgsql;
 ```
 
 ```SQL
@@ -121,7 +122,7 @@ $$ LANGUAGE plpgsql;
 ```
 
 ```SQL
-SELECT * from get_director_movie('f43ac5dd-2d37-4766-a3ee-1de1f05f2aa6');
+SELECT * from get_director_movie('8b9d9b60-2cc0-4e61-87a7-5ef5a0e9e7c9');
 ```
 
 ### Lier un acteur à un personnage et à un film
@@ -142,11 +143,11 @@ INSERT INTO movie_characters (movie_id, character_id)
 VALUES (p_movie_id, p_character_id);
 
 END;
-$$ language plpgsql;
+$$ LANGUAGE plpgsql;
 ```
 
 ```SQL
-call add_actor_to_movie('ad9386f1-6447-4bc4-858d-37ca7d968076','5a3a21e4-dbfc-406b-aab1-bb189daf9ea9','5c38d0c4-c470-4df3-8d7b-07326b77a670');
+CALL add_actor_to_movie('ad9386f1-6447-4bc4-858d-37ca7d968076','5a3a21e4-dbfc-406b-aab1-bb189daf9ea9','5c38d0c4-c470-4df3-8d7b-07326b77a670');
 ```
 
 ### Créer un acteur et lui assigné un personnage puis l'ajouter dans un film
@@ -177,11 +178,11 @@ VALUES (p_actor_id, p_character_id);
 INSERT INTO movie_characters (movie_id, character_id)
 VALUES (p_movie_id, p_character_id);
 END;
-$$ language plpgsql;
+$$ LANGUAGE plpgsql;
 ```
 
 ```SQL
-call add_actor(
+CALL add_actor(
 gen_random_uuid(),
 'Ezra',
 'Odyn',
@@ -189,7 +190,7 @@ gen_random_uuid(),
 gen_random_uuid(),
 'Black Panther',
 'Personnage principal',
-'702a0dd6-12b5-4ea7-adc1-fab458f7f6b8'
+'2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e'
 );
 ```
 
@@ -235,7 +236,7 @@ BEGIN
     END IF;
     RETURN NEW;
 END;
-$$ language plpgsql;
+$$ LANGUAGE plpgsql;
 ```
 
 ```SQL
