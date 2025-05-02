@@ -42,9 +42,9 @@ pgcli -h 10.2.0.76 -U User -d netstream
 ### 4.2. Création de la base et de l'utilisateur
 
 ```sql
-CREATE DATABASE NetStream_db;
-CREATE USER NetStream_user WITH PASSWORD 'motdepass';
-GRANT ALL PRIVILEGES ON DATABASE NetStream_db TO NetStream_user;
+CREATE DATABASE Netstream;
+CREATE USER administrator WITH PASSWORD 'admin';
+GRANT ALL PRIVILEGES ON DATABASE NetStream TO administrator;
 ```
 
 ---
