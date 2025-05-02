@@ -37,11 +37,15 @@ La base de données choisie est **PostgreSQL**, un SGBDR open-source et sécuris
 pgcli -h 10.2.0.76 -U User -d netstream 
 ```
 
+<<<<<<< Updated upstream
 ### 4.2. Création de la base et de l'utilisateur
+=======
+### 4.2. Création de la base de données
+>>>>>>> Stashed changes
 ```sql
-CREATE DATABASE NetStream_db;
-CREATE USER NetStream_user WITH PASSWORD 'motdepass';
-GRANT ALL PRIVILEGES ON DATABASE NetStream_db TO NetStream_user;
+CREATE DATABASE Netstream;
+CREATE USER administrator WITH PASSWORD 'admin';
+GRANT ALL PRIVILEGES ON DATABASE NetStream TO administrator;
 ```
 
 ---
