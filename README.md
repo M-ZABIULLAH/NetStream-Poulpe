@@ -2,16 +2,16 @@
 
 ## 📑 Sommaire
 
-- [📋 Règle de gestion](./management-rule.md)
-- [📚 Dictionnaire de données](./data-dictionary.md)
-- [🔍 Photo MCD](./Picture-MCD-MLD-MPD/mcd.png)
-- [🔍 Photo MLD](./Picture-MCD-MLD-MPD/mld.png)
-- [🔍 Photo MPD](./Picture-MCD-MLD-MPD/mpd.png)
-- [💾 Choix du SGBD](./choice-of-SGBD.md)
+- [📋 Règle de gestion](./Regles-de-gestion.md)
+- [📚 Dictionnaire de données](./dictionnaire-de-donnees.md)
+- [🔍 Photo MCD](./Photo-MCD-MLD-MPD/mcd.png)
+- [🔍 Photo MLD](./Photo-MCD-MLD-MPD/mld.png)
+- [🔍 Photo MPD](./Photo-MCD-MLD-MPD/mpd.png)
+- [💾 Choix du SGBD](./choix-du-SGBDR.md)
 - [📜 Script SQL](./script-sql.md)
 - [🛠️ Crud SQL Avancée](./sql-avancee.md)
 - [📖 Documentation](./Documentation.md)
-- [💾 Documentation rétention de sauvegarde](./Documenting-the-backup-rentention-policy.md)
+- [💾 Documentation rétention de sauvegarde](./Documentation-de-la-politique-de-retention.md)
 - [📝 Contexte](#📝-contexte-du-projet)
 - [⚡ Requêtes SQL](#⚡-Requetes-SQL)
 - [## 👥 Contributeurs](#-contributeurs)
@@ -71,7 +71,7 @@ JOIN character c ON c.character_id = act.character_id
 JOIN movie_characters mv ON mv.character_id = c.character_id
 JOIN movie m ON m.movie_id = mv.movie_id
 WHERE character_type = 'Personnage principal'
-AND m.movie_title = 'King Kong';
+AND m.movie_title = 'The Great Escape';
 ```
 
 ### 🎭 La liste des films pour un acteur/actrice donné
@@ -88,25 +88,35 @@ JOIN movie m ON m.movie_id = mv.movie_id;
 
 ```sql
 INSERT INTO movie (movie_id, movie_title, movie_release_date, movie_length, director_id)
-VALUES (gen_random_uuid(), 'Sonic', '2015-01-10', '01:00:00', '770561c0-81e7-4140-bf51-7588f9a8ceaa');
+VALUES (
+gen_random_uuid(),
+'Astérix et Cléopatre',
+'1968-02-16',
+'01:20:00',
+'8b9d9b60-2cc0-4e61-87a7-5ef5a0e9e7c9'
+);
 ```
 
 ### ➕ Ajouter un acteur/actrice
 
 ```sql
 INSERT INTO actor (actor_id, actor_firstname, actor_lastname, actor_birthdate)
-VALUES (gen_random_uuid(), 'Scarlett', 'Johansson', '1984-11-22');
+VALUES (
+gen_random_uuid(),
+'Will',
+'Smith',
+'1968-09-25'
+);
 ```
 
 ### 🔄 Modifier un film
 
 ```sql
 UPDATE movie
-SET movie_title = 'Sonic',
-    movie_release_date = '2015-01-10',
-    movie_length = '01:20:00',
-    director_id = '770561c0-81e7-4140-bf51-7588f9a8ceaa'
-WHERE movie_id = '702a0dd6-12b5-4ea7-adc1-fab458f7f6b8';
+SET movie_title = 'Je suis une légende',
+    movie_release_date = '2007-12-19',
+    movie_length = '01:40:00',
+WHERE movie_id = '1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d';
 ```
 
 ### 🗑️ Supprimer un acteur/actrice
@@ -114,6 +124,16 @@ WHERE movie_id = '702a0dd6-12b5-4ea7-adc1-fab458f7f6b8';
 ```sql
 DELETE FROM actor
 WHERE actor_id = '8b5b3470-264c-46d5-82f3-3e840b34a6b9';
+```
+
+ou
+
+```sql
+DELETE FROM acting
+WHERE actor_id = 'c3d4e5f6-a7b8-9c0d-1e2f-3a4b5c6d7e8f';
+
+DELETE FROM actor
+WHERE actor_id = 'c3d4e5f6-a7b8-9c0d-1e2f-3a4b5c6d7e8f';
 ```
 
 ### 🕒 Afficher les 3 derniers acteurs/actrices ajouté(e)s
